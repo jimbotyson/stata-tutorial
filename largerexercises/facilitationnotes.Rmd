@@ -1,0 +1,171 @@
+---
+title: "StataLearn Facilitator Page"
+author: "Jim Tyson"
+date: "2023-01-06"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Timing and pace
+
+The larger exercises divide the material in to two parts.  Each of these parts should take no longer than two hours online or one and one half hours in the classroom.  This estimation assumes that you will only cover a small part of the material on graphing (section 14) in the classroom.  If the learners are willing, they can be asked to review this material between sessions to make classroom time more productive.
+
+To keep to this timing you will need to ensure that learners are attentive and engaged.  The best way to do this is to maintain an active learning and interactive classroom; to encourage learner collaboration; to have pro-active TAs; and to find the balance between no-learner-left-behind and having struggling learners set the pace.
+
+Another issue that critically affects the timing and pace of this course is learner-readiness in terms of statistical knowledge.  This should be addressed head on and early.  At the beginning of the session remind learners that this is not a statistics class and ask them to agree that they understand that and that they acknowledge that it is their responsibility to have the statistical skills required.
+
+Some learners have suggested that section 4 can be omitted and I agree.  Certainly no time should be wasted on this material.
+
+
+# Before the classroom
+
+Make sure that learners know what software or equipment is required.  If this is a BYOD session then consider what steps you will take to ensure that learners' devices are in a ready state:
+ 
+ * have a pre-class technical support session;
+ * set aside time for set-up issues at the beginning of the session;
+ * solicit help from your institutional support services to help learners before the session.
+ 
+These are not the only alternatives, but you must minimize technical support in the classroom.
+
+# Accessibility issues
+
+Many of the issues covered at the  [Accessible STEMM Introduction](https://www.makethingsaccessible.com/guides/accessible-stemm-introduction/) will be relevant.
+
+The main website and exercise page are screen reader ready.  Both can be resized by standard browser controls and learners who need to can apply custom CSS.
+
+Stata do files are screen reader friendly.  Log files are readable, but use a fixed font and white spacing for layout.  For this reason tabular output (of any kind) is mostly useless for the visually impaired or blind user.
+
+The best solution is to encourage students to `putdocx` all output into Word files.  Since this method is not introduced until the end of the LearnStata web site, you should
+
+ * train a TA in the techniques required;
+ * assign learners who need to use it a trained TA to support them;
+ * where possible have learner attend 15 minutes early to meet with a trained TA and practice the `putdocx` technique.
+ 
+If a learner will use an interpreter (for sign or any other language), consider providing the interpreter with a specialist vocabulary list ahead of time.  It is unlike that the interpreter will know terms like 'variance' or 'MANCOVA'.
+
+# Materials
+
+1.  The website [Learn Stata](https://www.ucl.ac.uk/~ccaajim/LearnStata/);
+
+2.  The data files:
+
+    1.   [The examination results data](https://www.ucl.ac.uk/~ccaajim/results);
+
+    2.  [The medical trial data](https://www.ucl.ac.uk/~ccaajim/medicalXtrial.xls).
+
+The examination results data is used for most the interactive demonstration code and for the shorter exercises. The medical trial data is used for the larger exercises, parts I and II.
+
+The [Larger exercises instructions](https://www.ucl.ac.uk/~ccaajim/LearnStata/largerexercises/largerexercises.html).
+
+The [sample solution file](https://www.ucl.ac.uk/~ccaajim/LearnStata/largerexercises/statlearnexamplescript.do)
+
+### Supplementary tools
+
+I have found that a live chat or q&a tool is useful - teams, slack, hangouts - whatever suits.
+
+I generally have an electronic whiteboard open and accessible for questions and comments.
+
+In the past I used an etherpad for everyone to share code during the session.  Since fewer public etherpads are available I am trialling **pad.riseup.net** and **pastebin**.  Make sure that whatever you decide to use to share code you set it up at the start of the session.
+
+
+## Presentation method
+
+The web site provides the outline of progress. As concepts are introduced you should present by live coding. It is not effective to present static powerpoint slides and expect learners to read them and learn.
+
+Presented with static slides, learners will try to copy the information on the slide and to write interpretative notes on the information. Since this information is on the website, there is no advantage to this.
+
+Instead learners should be encouraged to:
+
+-   keep the website open for reference and to copy code when appropriate;
+-   open a Stata command log for the session to track what they do;
+-   open a do file and make any notes they need as comments in the do file.
+
+This means that before you proceed with the substantive Stata material, you must make sure that the students know how to
+
+-   open a log;
+-   view a log;
+-   create a do file;
+-   add comments to a do file;
+
+It is too easy to think that these are obvious skills, but it is imperative that you practice them with the students at the start of the session. You will need to make sure that they understand the advantage of using plain text format for the log and that they can view the log outside of Stata.
+
+## Live coding
+
+Show your console or do file as you go through the material. Do not sanitize what you type overly: mistakes happen and the students need to see how you correct a mistake (for example showing them how to use **page up** on the console).
+
+Talk through what you code explaining what you are doing. The learners will need a moment longer than you to complete code and you should remain aware of how well they are keeping up. Have your TA's patrol the room checking that students are comfortable with the pace.
+
+Use traffic light post-its. TAs (where available) must respond immediately to red flags and either
+
+-   fix the issue for the learner;
+-   refer the issue to the class;
+-   request the facilitator's individual attention if absolutely necessary.
+
+## Questions
+
+In a classroom session you should allow allow questions at any time if at all possible - only restrict if the group is very learge. If you cannot take open access questions then use
+
+-   an electronic question board (padlet, miro etc);
+-   a team chat stream (or slack or any easily accessible equivalent);
+
+to manage questions. Teams has an especially useful Q&A stream you can use.
+
+Where reasonable throw questions to the learners and if possible frame your answer as summarizing and extending their responses. This may require some creative use of "that's very close to what we would do..." etc.
+
+Some learners will find asking questions very difficult. Assure the group early on that they are never alone in having questions and everyone benefits when they ask. Make learners aware that they can pass a question to a TA to ask without identifying them.
+
+When answering questions it has a positive effect for learners if they see you search for a solution - a goole search for example or a look at UCLA oarc pages (<https://stats.oarc.ucla.edu/>).
+
+## Exercises
+
+### Small exercises
+
+Even for the small exercises learners benefit from collaboration.
+
+Read the exercise rubric with them before getting to work.
+
+Invite questions after the read through.
+
+Double check that they have access to the data required.
+
+You can either ask them to work on the solution or you can do it collectively with the facilitator asking for suggestions and typing code in response.
+
+As far as possible have a short feedback and reflection after each exercise.
+
+### Larger exercises
+
+Make sure before the session that TAs have read the directions for these exercises and that they have an opportunity to ask questions or make comments.
+
+The difficulties are
+
+-   helping students interpret the instructions;
+-   encouraging them to seek solutions before asking for help.
+
+Before setting the learners to work have a collective read through. Depending on the learners, you can ask them to lead this or you can read through, pausing for questions.
+
+Ask for feedback on understanding the task - use a polling system if you can to get feedback and buy in on understanding.
+
+It is best for the groups to work on only one do file and to use pastebin or some equivalent (etherpad?) to share the solution later.
+
+Explain the roles of navigator and driver and ask the students to swap roles thoughout the exercise.
+
+# Reflection and Feedback
+
+You will use the institutional feed back form, but engaging learners live after a session is immensely useful for both you and them.
+
+Where possible leave time for a short reflection and feedback activity.  The simpler the exercise, the more likely students will engage.  I often use these:
+
+ 1 Pace question: Too slow?  Too fast?  OK? Remember to feedback yourself on this - do you recognize the response?  Is it typical?  Can you do anything in response?
+ 2 Length question:  Too short?  Too long?  About right?
+ 3 Expectation question: did the course cover the material you expected?  Is there anything specific you think should be added?
+ 4 What would you change?  What change do you think we could make to improve the course?
+ 
+Feedback is difficult for learners.  Reassure them that you are a professional educator and you don't take critical feedback personally but as an opportunity for growth.
+
+Don't leave feedback hanging - try to respond to issues raised.  You cannot always meet the demands made in feedback directly, but can you for example, offer further opportunities for learning or support?
+
+It helps greatly to use an electronic board for feedback where possible (again padlet or miro) and to have a TA or two recording the discussion in some way.
+

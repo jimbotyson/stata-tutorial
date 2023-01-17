@@ -1,0 +1,71 @@
+---
+title: "SomeStataBasics"
+author: "Jim Tyson"
+format: html
+---
+
+# Some Stata Basics
+
+You can skip the material on folder management if you are short of time and go straight to the section on the interface.
+
+# Demonstration
+
+## Folder management
+
+You may have both windows and mac users.  The students can create the project folder stucure in their OS if they wish or they can do it from the Stata console - the code is there to copy.  Make sure they give the project root folder a  sensible name.
+
+## Stata Interface
+
+Before you create a new do file for the session.  Introduce the Stata application and environment.  Explain the 4 main windows and the two pains in the variables/properties window.
+
+Use `disp 2+2` to illustrate the console and results window.
+
+Show how to change fonts and themes using edit general preferences and by right clicking in a window.
+
+Use `help` to show the help viewer.  Look at the link to pdf documentation on help pages.
+
+If you have time, you can use `edit` to enter a few data items and look at their properties: maybe var1: 1 2 3 and var2: a b c.
+
+## Opening a do file
+
+Use the window menu and open a do file.  Discuss what it should be named and where it should be stored.
+
+Explain comments: #
+Explain the line extender: ///
+Explain section book marks: **#
+Explain foldable sections: {}
+
+Reiterate the purpose of a do file and why you don't put help, list, browse etc in a script.  Emphasize that ignoring this instruction will case them problems during the session.
+
+Explain
+ 1 how to run part of a do file;
+ 2 how to run a complete do file.
+
+## Create a log
+
+Show how to open a log; how to insert the system date into a log file name; how to close the log.  Demonstrate finding and opening a log file in windows notepad.
+
+## Set the working directory
+
+Good practice is for your main script to set the correct working directory for your project (cd).
+
+## Read the exaination score data
+
+use https://www.ucl.ac.uk/~ccaajim/results
+
+Discuss different file formats and the `import` command.  Distinguish online storage of data and local storage of data.
+
+## Describe and codebook
+
+Run describe and codebook.  Compare their output.  See if* you can prompt them to examine the **maths** scares - are they different why?  Use this to talk about storage types.  Explain display formats.
+
+## Listing and sorting
+
+List with `in`.
+List with `if`.
+
+Sort.
+Gsort.
+
+# Break
+

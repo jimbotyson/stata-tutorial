@@ -1,0 +1,17 @@
+---
+title: "Third Session"
+format: html
+---
+
+# Simple graphs
+
+Demonstrate live lots of simple graphs.  
+
+Be sure to show that issuing a graph command destroys a currently open graph window unless you use the named() option:
+
+```
+hist english, named(english)
+hist history, named(history)
+
+which ensures that the new graphs are opened in new tabs in the open graph window.
+```

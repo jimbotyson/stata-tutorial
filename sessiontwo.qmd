@@ -1,0 +1,138 @@
+---
+title: "Detecting and correcting to labelling"
+author: "Jim Tyson"
+format: html
+---
+
+# Detecting errors
+
+The examination data has an anomalous score
+
+surname   maths
+DENCIK    500
+
+First look at the codebook for maths
+
+`codebook maths`
+
+and at the maths variable properties: maths is of type `integer`, which is the clue that something is wrong.
+
+Illustrate listing this score using 
+
+`list surname maths if maths > 100`
+
+This is not a very authenticate exercise.  Error detection is more difficult than this simple example, but the aim is to help the learners to think computationally, rather than seeing Stata scripting as just writing lists of commands.
+
+## Concepts
+
+### Relational operators
+
+==
+
+>=
+
+<=
+
+!=
+
+at this point it may be worth mentioning the missing value symbol in Stata.
+
+Use each of these with list to filter some data.  Use them in combination with `&` and `|` to make a complex filter.
+
+### Functions
+
+We are going to use just one function `inrange()` to help detect errors in our data, to introduce slightly more sophisticated scripting and to promote thinking about scripting as programming.
+
+First, demonstrate the following code:
+
+```
+generate anomaly = 0
+replace anomaly = 1 if maths > 100 | maths < 0
+list surname anomaly
+table anomaly
+```
+
+You must alert learners that values `.`, ie missing, will end up with anomaly = 1 because `.` is greater than 100!  Have them think/talk about this and how you would avoid this error.  It will help to preserve your data, make one maths score missing, generate anomaly again and see the effect.  You can then restore the data.
+
+Now, show and run this code:
+
+```
+gen anomaly = 0
+replace anomaly = 1 if !inrange(maths,0,100)
+```
+
+Examine the results and tabulate them to compare with the conditional replacement technique above.
+
+Try generating `good` if maths **is** inrange.
+
+You may want to do the exercise 8.2 collectively.
+
+## Replacing values
+
+Now may be a good time to mention 
+
+```
+generate...,replace
+```
+
+Make sure that all learners complete exercise 8.4 or later anlysis will be affected.
+
+# Generating new values and recoding existing values
+
+Illustrate `generate`
+
+`generate mynewar="Jim"`
+
+`generate halfage = age/2`
+
+show how many rows of data are created. Illustrate `replace`:
+
+`replace halfage = age*0.5`
+
+## egen
+
+Demonstrate some egen examples.
+
+# Recoding
+
+Work through the example recoding line by line!
+
+## Cut
+
+`cut` can be difficult to grasp - working out which intervals are open or closed for example.  Is the maximum value in the cut command < or <=?  If you judge the learners will be confused you may omit the `cut` exercise.
+
+Have the students look at the help on cut.
+
+Briefly explain `local` using `disp` to illustrate.
+
+Talk through this code:
+
+```
+summarize age
+local agemin = r(min)
+local agemax = r(max)
+di `agemin'
+di `agemax'
+egen agegrp = cut(age), at(`agemin', 40,50,`agemax')
+```
+
+Explain why we chose to first calculate min and max (the code would not be very robust if we hardwired these values into the cut procedure).
+
+# Selecting
+
+Remind learners about `preserve` and `restore`.
+
+# Labelling
+
+Explain the difference between labeling variables and labeling values.
+
+Make a label for the variable gender/sex.  After applying the label use `describe` to check the effect.
+
+
+
+
+
+
+
+
+

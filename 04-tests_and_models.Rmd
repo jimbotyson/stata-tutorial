@@ -1,0 +1,236 @@
+# Hypothesis tests
+
+## For two categorical variables
+
+A common procedure is to test for an association between two categorical variables. We can illustrate this procedure using a tabulation with a $\chi{}^2$ statistic.  (Of course, the variable sex is not necessarily binary valued.)
+
+    table sex class, expected chi2
+
+## Exercise
+
+Create the table with $\chi{}^2$ statistic and expected values as above. Should you reject the *H0* that `sex` and `class` are not associated?
+
+## For one continuous and one categorical variable of two levels
+
+If we have one continuous numeric variable and one two level categorical variable (such as employed vs unemployed) that would divide our data into two groups, we can ask ourselves whether the mean of the continuous variable differs for the groups (with *H0* being that they do not).
+
+If our two groups are independent, then we must first ask if the **variance** in the data is more or less equal between groups. The null hypothesis is that the variances are equal. This is tested by the comparison of variances using Stata's `robvar` command. We can test the `maths` scores by `sex` in our data
+
+    robvar maths, by(sex)
+
+Knowing whether or not we are dealing with groups displaying (more or less) equal variance in the variable of interest, we can go on to conduct an **independent samples t-test**. The code is
+
+    ttest maths, by(sex)
+
+(Assuming that we have interpreted the results of `robvar` to mean the variance in maths for the two groups is equal).
+
+## Exercise
+
+Run the `robvar` procedure above but for the `history` and `sex` variables. What are the three **W** statistics produced? Which of them tests that the variances are equal for a comparison of means? Is there strong enough evidence in this case to reject the null hypothesis?
+
+Use the `ttest` command to test the null hypothesis that
+
+$$\mu{}\ english _{\ female \ students} = \mu \ english _{\ male\ students}$$
+
+What conclusion do you draw?
+
+## The paired samples ttest
+
+We can also compare the same group of subjects on two measures to see if the means differ. In this case there is no need to check the variances before conducting the test. For example we could test whether or not mean scores in English and History differ (with the null hypothesis that they do not)
+
+    ttest english == history
+
+Using this procedure, how do English scores compare to History scores and how do English scores compare to Mathematics scores?
+
+## Once continuous and one categorical variable of more than two levels
+
+We can compare the level `avxm` by `teacher`, this is to say test the null hypothesis
+
+$$\mu{}\ avxm \ _{teacher \ one} =  \mu{}\ avxm \ _{teacher \ two} = \mu{}\ avxm \ _{teacher \ three} $$
+
+### One way ANOVA and post-hoc testing
+
+The Stata command to test the null hypothesis above is
+
+    oneway maths teacher, bonferroni tabulate
+
+This command produces summary statistics the ANOVA statistic **F**, its associated probability, and other quantities calculated as part of the ANOVA. In the version given above, we have included a tabulation of pairwise comparisons using the *bonferroni* correction. We can separately examine the pairwise comparisons if we wish with
+
+    pwmean avxm, over(teacher) mcompare(bonferroni) effects
+
+This method does not display the ANOVA table itself and the **mcompare()** option gives us access to a slightly different range of correction options.
+
+<!-- ## Visualisation for AVOVA -->
+
+<!-- library("ggpubr") -->
+
+<!-- ggboxplot(my_data, x = "group", y = "weight",  -->
+
+<!--           color = "group", palette = c("#00AFBB", "#E7B800", "#FC4E07"), -->
+
+<!--           order = c("ctrl", "trt1", "trt2"), -->
+
+<!--           ylab = "Weight", xlab = "Treatment") -->
+
+## Two continuous variables
+
+## Correlation
+
+Analysis of two continuous variables begins with calculating the **Pearson Correlation Coefficient: R**. This statistic ranges from
+
+-   -1 indicating an inverse or negative correlation
+-   0 indicating no correlation
+-   +1 indicating a positive correlation
+
+We should take note that a correlation has not only magnitude and direction, but that there is an associated hypothesis test: the the true correlation is 0. This test gives a **p value** associated with **R**.
+
+The code to compute R in Stata is
+
+    correlate var1 var2
+
+This computes R for `var1` and `var2`. If you do not specify a variable list, Stata computes correlations between all non-string variables in your data set.
+
+## Exercise
+
+Compute Pearson correlations with significance values for the pairs
+
+-   english-maths
+-   english-history
+
+Explain to your learning partner what the results mean to you.
+
+### Simple visualisation of correlation
+
+The simplest way to visualise a correlation is with a scatter plot. You may wish to consider, based on your plans for further analysis which variable you wish to assign to which axis. To create a scatter plot you can start with
+
+    scatter english history
+
+To add the trend line:
+
+    scatter english history || lfit english history
+
+And add a confidence interval:
+
+    scatter english history || lfitci english history
+
+Now you can add labels, titles and so on
+
+    twoway lfitci english history  || scatter english history, jitter(5) ///
+      title("English as a predictor of History scores") ///
+        legend(off) ///
+        mcolor(red) ///
+        msymbol(Oh) ///
+        subtitle("For all students") ///
+        xtitle("English exam scores") ///
+        ytitle("History exam scores") ///
+        scheme(sj)
+
+Stata has a very large range of graphing commands and options. While they are reasonably complicated, a good way to explore them is through [this gallery](https://www.stata.com/support/faqs/graphics/gph/stata-graphs/ "Stata graph gallery").
+
+## Exercise
+
+Using any resources you can find, try to find more Stata graph schemes and try at least three on the code above.
+
+# Regression
+
+## Simple Linear Regression
+
+The most basic regression command in Stata is `regress`. The syntax is
+
+    regress y-variable x-variable(s)[, options]
+
+The results include an ANOVA table and a table of coefficients. The ANOVA table has measures associated with the $H0$ that this model is no better than a model with no predictor variables. You should read [Regression analysis, annotated output](https://stats.oarc.ucla.edu/stata/output/regression-analysis) for help understanding the results.
+
+The important components of the coefficient table are
+
+-   \_cons: the intercept
+-   beta coefficient ($m$) and it's associated $t$ score with $p$ value and confidence interval.
+
+## Exercise
+
+Run a simple linear regression with `history` as the dependent variable (the *y* variable) and `english` as the single, independent variable (the *x* variable).
+
+-   Is this model better than a model with **no** predictor variables?
+-   Fill out the coefficients in the equation for the line $y=mx+\beta{}$;\
+-   Overall, what portion of the variance in `history` can be attributed to variance in `english`;
+-   Is it plausible that the true value of $m$ (the slope of the line of best fit) is 0?
+
+## Multiple linear regression
+
+The command is
+
+    regress y-variable x-variable1 x-variable2...x-variablen [,options]
+
+## Exercise
+
+Using California Department of Education's API 2000 dataset from
+
+    https://stats.idre.ucla.edu/stat/stata/webbooks/reg/elemapi
+
+investigate the academic performance of schools (api00) with respect to average k3 class size, the percentage of students receiving free meals and the percentage of teachers holding full teaching credentials. Would you say that any or all of these factors affect a schools performance?
+
+## Regression with categorical variables
+
+It is possible to include categorical variables in a regression model. For instance
+
+    regress avxm i.class
+
+The prefix *i.* signals to Stata this this variable should be treated as a factor. Stata will effectively recode this as two dummy, binary variables class_2 and class_3. So the possibilities are
+
+| Class_2 | Class_3 | Original class |
+|:-------:|:-------:|:--------------:|
+|    1    |    0    |       2        |
+|    0    |    1    |       3        |
+|    0    |    0    |       1        |
+
+: Dummy encoding of the class variable
+
+If we recall equation for the linear model $y = mx_{1} + mx_{2}...+...mx_n$, then we can see it applies unchanged for this new regression, except that for each coefficient, $x$ ranges over only 0 or 1.
+
+Here is the result from Stata:
+
+![Output from a regression with dummy binary variables.](images/catreg.PNG "Output from regression with dummy variables")
+
+Here, the intercept (`_cons`) is the average of the dependent variable - of `avxm` - when class is equal to the base category, which in this case is class one. For class two, the value of y is
+
+$$( 4.54*1)+(8.11*0)+51.52$$
+and for class three
+
+$$( 4.54*0)+(8.11*1)+51.52$$
+To further underline the nature of a regression with categorical independent variables, you can compare the results of this regression with the output form Stata's `oneway` and `pwmean` commands.  You will see that the differences in means and the statistics and associated $p$ value  are identical to those in your regression output.
+
+## Exercise
+
+Run a one way ANOVA test comparing `avxm` by level of `class`.  Add the post hoc pairwise tests with Bonferroni correction.  
+
+Run a `pwmean` procedure for `avxm` over `class`.  
+
+How would you say the results from these compare with the regression above?
+
+Import the data from this file:
+
+https://www.ucl.ac.uk/~ccaajim/medtrial.csv
+
+Convert the variable gender to a numeric variable so that you can use it as a factor in a regression.
+
+Run a regression analysis with **hafter** as the dependent variable and **age** and **gender** as the independent variables.  Test also for any interaction.
+
+How do you interpret the results?
+
+# Larger Exercises Part II
+
+You should now attempt **Part II** of the [larger exercises](https://www.ucl.ac.uk/~ccaajim/LearnStata/largerexercises/largerexercises.html).
+
+It is better to work with a partner (at least more than one and no more than three).
+
+After you have written a script in response to the questions, your facilitator will provide a sample solution.  You should review your script and the sample together and formulate any questions or observations for a round table discussion.
+
+The sample script is not necessarily
+
+ * the best solution;
+ * a complete solution;
+ * the only solution.
+ 
+Do not shy away from suggesting improvements.
+
+# Notes

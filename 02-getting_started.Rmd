@@ -1,0 +1,75 @@
+# Getting Started
+
+## Prerequisites
+
+These tutorials assume no knowledge of R but do assume that you are comfortable using a computer with a modern user interface (for example Windows, MacOs, GNU/Linux with Ubuntu), and that you will be happy typing commands in a console or a script. You will also need to learn how to navigate a folder or directory tree.
+
+## Software Requirements
+
+This tutorial has been tested using [recent versions of R and RStudio.](R version 4.2.2 (Innocent and Trusting) has been released on 2022-10-31.)  Please ensure that your applications are up to date.
+
+Download R and RStudio
+
+## How to use these materials
+
+### The Larger Exercises
+
+The most important learning experiences in this offering is the two pat **larger exercises**, each of which covers a reasonably coherent subset of the material.  You should complete the **Part I** exercise after you have learned about basic graphing and **Part II** when you have learned about regression modelling.  
+
+They are designed to be completed by learners in pairs. A pair has two roles: the driver, who sits at the active console and types code into a file or command prompt; the navigator, watches the driver and reviews code as it written makes suggestions and possible corrections, and who researches (using Google for example) solutions as problems arrive.  You should **swap** roles every 15 minutes or so. 
+
+After the learners work on one of the exercises, the solution script should be presented, and a round table discussion of problems encountered and alternative solutions should take place.
+
+### Skippable
+
+
+### General advice
+
+Test all the code you see. Some of the code is written to be added to a script and you should develop a single script for all sections since some of the later material will assume that you have run earlier example code. Sometimes the tutorial suggests that you run a command on the console or command line and you should do so. Don't add commands intended for the console to your script - they may cause your script to break and fail.
+
+Code to be executed and run by you looks like this:
+
+    type this at the console and hit return
+    or add it to a script and run the script
+
+Generally the tutorial will be explicit about when you should add code to a script.
+
+As the series progresses, I will provide less explicit detail in my instructions.  You will move from 
+
+    type these characters and hit return
+    
+to
+
+"The R command for a oneway anova is `oneway`.  Use this command to test the mean of `boodpressure` by `ethnicity`"
+
+## Data
+
+The data files to be used in most exercises and examples are at
+
+    https://www.ucl.ac.uk/~ccaajim/results
+    
+and
+
+    https://www.ucl.ac.uk/~ccaajim/medicalXtrial.xls
+    
+You can read these data using the `import` command.  You will find [this cheeatsheet useful](https://www.stata.com/bookstore/statacheatsheets.pdf).
+
+
+## Reference material
+
+The best source of learning material is at
+
+    https://stats.oarc.ucla.edu/stata/
+
+and you should download the cheat sheets from
+
+    https://www.stata.com/bookstore/stata-cheat-sheets/
+
+## To be added
+
+ - use of frames;
+ - reshaping data sets.
+ 
+ 
+
+   

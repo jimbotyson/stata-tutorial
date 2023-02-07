@@ -40,7 +40,7 @@ As the series progresses, I will provide less explicit detail in my instructions
     
 to
 
-"The R command for a oneway anova is `oneway`.  Use this command to test the mean of `boodpressure` by `ethnicity`"
+"The R command for a one way anova is `aov(y~x)`.  Use this command to test the mean of `boodpressure` by `ethnicity`"
 
 ## Data
 
@@ -52,22 +52,21 @@ and
 
     https://www.ucl.ac.uk/~ccaajim/medicalXtrial.xls
     
-You can read these data using the `import` command.  You will find [this cheeatsheet useful](https://www.stata.com/bookstore/statacheatsheets.pdf).
+You can read these data using the `import` command.  You will find [this cheeatsheet useful](https://posit.co/wp-content/uploads/2022/10/data-import.pdf).
 
 
 ## Reference material
 
 The best source of learning material is at
 
-    https://stats.oarc.ucla.edu/stata/
+    https://stats.oarc.ucla.edu/r/
 
 and you should download the cheat sheets from
 
-    https://www.stata.com/bookstore/stata-cheat-sheets/
+    https://posit.co/resources/cheatsheets/
 
 ## To be added
 
- - use of frames;
  - reshaping data sets.
  
  

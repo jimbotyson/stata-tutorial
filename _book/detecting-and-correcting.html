@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>8 Detecting and correcting | Data Manipulation and Analysis in R</title>
+  <meta name="description" content="8 Detecting and correcting | Data Manipulation and Analysis in R" />
+  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="8 Detecting and correcting | Data Manipulation and Analysis in R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta name="github-repo" content="jimbotyson/RTutorial" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="8 Detecting and correcting | Data Manipulation and Analysis in R" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="listing-and-sorting.html"/>
+<link rel="next" href="generating-new-values-and-recoding-existing-values.html"/>
+<script src="assets/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="assets/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="assets/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="assets/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="acknowledgments.html"><a href="acknowledgments.html"><i class="fa fa-check"></i><b>2</b> Acknowledgments</a></li>
+<li class="chapter" data-level="3" data-path="getting-started.html"><a href="getting-started.html"><i class="fa fa-check"></i><b>3</b> Getting Started</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="getting-started.html"><a href="getting-started.html#prerequisites"><i class="fa fa-check"></i><b>3.1</b> Prerequisites</a></li>
+<li class="chapter" data-level="3.2" data-path="getting-started.html"><a href="getting-started.html#software-requirements"><i class="fa fa-check"></i><b>3.2</b> Software Requirements</a></li>
+<li class="chapter" data-level="3.3" data-path="getting-started.html"><a href="getting-started.html#how-to-use-these-materials"><i class="fa fa-check"></i><b>3.3</b> How to use these materials</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="getting-started.html"><a href="getting-started.html#the-larger-exercises"><i class="fa fa-check"></i><b>3.3.1</b> The Larger Exercises</a></li>
+<li class="chapter" data-level="3.3.2" data-path="getting-started.html"><a href="getting-started.html#skippable"><i class="fa fa-check"></i><b>3.3.2</b> Skippable</a></li>
+<li class="chapter" data-level="3.3.3" data-path="getting-started.html"><a href="getting-started.html#general-advice"><i class="fa fa-check"></i><b>3.3.3</b> General advice</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="getting-started.html"><a href="getting-started.html#data"><i class="fa fa-check"></i><b>3.4</b> Data</a></li>
+<li class="chapter" data-level="3.5" data-path="getting-started.html"><a href="getting-started.html#reference-material"><i class="fa fa-check"></i><b>3.5</b> Reference material</a></li>
+<li class="chapter" data-level="3.6" data-path="getting-started.html"><a href="getting-started.html#to-be-added"><i class="fa fa-check"></i><b>3.6</b> To be added</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="some-r-use-basics.html"><a href="some-r-use-basics.html"><i class="fa fa-check"></i><b>4</b> Some R use basics</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="some-r-use-basics.html"><a href="some-r-use-basics.html#folders"><i class="fa fa-check"></i><b>4.1</b> Folders</a></li>
+<li class="chapter" data-level="4.2" data-path="some-r-use-basics.html"><a href="some-r-use-basics.html#exercise"><i class="fa fa-check"></i><b>4.2</b> Exercise</a></li>
+<li class="chapter" data-level="4.3" data-path="some-r-use-basics.html"><a href="some-r-use-basics.html#exercise-1"><i class="fa fa-check"></i><b>4.3</b> Exercise</a></li>
+<li class="chapter" data-level="4.4" data-path="some-r-use-basics.html"><a href="some-r-use-basics.html#common-file-types"><i class="fa fa-check"></i><b>4.4</b> Common File types</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="the-r-file.html"><a href="the-r-file.html"><i class="fa fa-check"></i><b>5</b> The R file</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="the-r-file.html"><a href="the-r-file.html#initialising-your-script"><i class="fa fa-check"></i><b>5.1</b> Initialising your script</a></li>
+<li class="chapter" data-level="5.2" data-path="the-r-file.html"><a href="the-r-file.html#exercise-2"><i class="fa fa-check"></i><b>5.2</b> Exercise</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="the-r-file.html"><a href="the-r-file.html#solution"><i class="fa fa-check"></i><b>5.2.1</b> Solution</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="the-r-file.html"><a href="the-r-file.html#which-directory"><i class="fa fa-check"></i><b>5.3</b> Which directory?</a></li>
+<li class="chapter" data-level="5.4" data-path="the-r-file.html"><a href="the-r-file.html#change-to-your-data-directory"><i class="fa fa-check"></i><b>5.4</b> Change to your data directory</a></li>
+<li class="chapter" data-level="5.5" data-path="the-r-file.html"><a href="the-r-file.html#exercise-3"><i class="fa fa-check"></i><b>5.5</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="dataset.html"><a href="dataset.html"><i class="fa fa-check"></i><b>6</b> Dataset</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="dataset.html"><a href="dataset.html#data-types"><i class="fa fa-check"></i><b>6.1</b> Data Types</a></li>
+<li class="chapter" data-level="6.2" data-path="dataset.html"><a href="dataset.html#interpretation-of-describe-output"><i class="fa fa-check"></i><b>6.2</b> Interpretation of <code>describe</code> output</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="dataset.html"><a href="dataset.html#storage-type"><i class="fa fa-check"></i><b>6.2.1</b> Storage type</a></li>
+<li class="chapter" data-level="6.2.2" data-path="dataset.html"><a href="dataset.html#format-types"><i class="fa fa-check"></i><b>6.2.2</b> Format types</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="dataset.html"><a href="dataset.html#interpretation-of-codebook"><i class="fa fa-check"></i><b>6.3</b> Interpretation of codebook</a></li>
+<li class="chapter" data-level="6.4" data-path="dataset.html"><a href="dataset.html#exercise-4"><i class="fa fa-check"></i><b>6.4</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="listing-and-sorting.html"><a href="listing-and-sorting.html"><i class="fa fa-check"></i><b>7</b> Listing and Sorting</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="listing-and-sorting.html"><a href="listing-and-sorting.html#listing-cases"><i class="fa fa-check"></i><b>7.1</b> Listing cases</a></li>
+<li class="chapter" data-level="7.2" data-path="listing-and-sorting.html"><a href="listing-and-sorting.html#exercise-5"><i class="fa fa-check"></i><b>7.2</b> Exercise</a></li>
+<li class="chapter" data-level="7.3" data-path="listing-and-sorting.html"><a href="listing-and-sorting.html#sorting"><i class="fa fa-check"></i><b>7.3</b> Sorting</a></li>
+<li class="chapter" data-level="7.4" data-path="listing-and-sorting.html"><a href="listing-and-sorting.html#gsort"><i class="fa fa-check"></i><b>7.4</b> <code>gsort</code></a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="detecting-and-correcting.html"><a href="detecting-and-correcting.html"><i class="fa fa-check"></i><b>8</b> Detecting and correcting</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="detecting-and-correcting.html"><a href="detecting-and-correcting.html#exercise-6"><i class="fa fa-check"></i><b>8.1</b> Exercise</a></li>
+<li class="chapter" data-level="8.2" data-path="detecting-and-correcting.html"><a href="detecting-and-correcting.html#exercise-7"><i class="fa fa-check"></i><b>8.2</b> Exercise</a></li>
+<li class="chapter" data-level="8.3" data-path="detecting-and-correcting.html"><a href="detecting-and-correcting.html#replacing-values"><i class="fa fa-check"></i><b>8.3</b> Replacing values</a></li>
+<li class="chapter" data-level="8.4" data-path="detecting-and-correcting.html"><a href="detecting-and-correcting.html#exercise-8"><i class="fa fa-check"></i><b>8.4</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="generating-new-values-and-recoding-existing-values.html"><a href="generating-new-values-and-recoding-existing-values.html"><i class="fa fa-check"></i><b>9</b> Generating new values and recoding existing values</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="generating-new-values-and-recoding-existing-values.html"><a href="generating-new-values-and-recoding-existing-values.html#new-values"><i class="fa fa-check"></i><b>9.1</b> New values</a></li>
+<li class="chapter" data-level="9.2" data-path="generating-new-values-and-recoding-existing-values.html"><a href="generating-new-values-and-recoding-existing-values.html#exercise-9"><i class="fa fa-check"></i><b>9.2</b> Exercise</a></li>
+<li class="chapter" data-level="9.3" data-path="generating-new-values-and-recoding-existing-values.html"><a href="generating-new-values-and-recoding-existing-values.html#recoding-values"><i class="fa fa-check"></i><b>9.3</b> Recoding values</a></li>
+<li class="chapter" data-level="9.4" data-path="generating-new-values-and-recoding-existing-values.html"><a href="generating-new-values-and-recoding-existing-values.html#exercise-10"><i class="fa fa-check"></i><b>9.4</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="selecting.html"><a href="selecting.html"><i class="fa fa-check"></i><b>10</b> Selecting</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="selecting.html"><a href="selecting.html#selecting-variables"><i class="fa fa-check"></i><b>10.1</b> Selecting variables</a></li>
+<li class="chapter" data-level="10.2" data-path="selecting.html"><a href="selecting.html#exercise-11"><i class="fa fa-check"></i><b>10.2</b> Exercise</a></li>
+<li class="chapter" data-level="10.3" data-path="selecting.html"><a href="selecting.html#selecting-cases"><i class="fa fa-check"></i><b>10.3</b> Selecting cases</a></li>
+<li class="chapter" data-level="10.4" data-path="selecting.html"><a href="selecting.html#using-a-filter-variable"><i class="fa fa-check"></i><b>10.4</b> Using a filter variable</a></li>
+<li class="chapter" data-level="10.5" data-path="selecting.html"><a href="selecting.html#the-uses-of-_all"><i class="fa fa-check"></i><b>10.5</b> The uses of _all</a></li>
+<li class="chapter" data-level="10.6" data-path="selecting.html"><a href="selecting.html#exercise-12"><i class="fa fa-check"></i><b>10.6</b> Exercise</a></li>
+<li class="chapter" data-level="10.7" data-path="selecting.html"><a href="selecting.html#creating-a-custom-variable-list"><i class="fa fa-check"></i><b>10.7</b> Creating a custom variable list</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="labelling.html"><a href="labelling.html"><i class="fa fa-check"></i><b>11</b> Labelling</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="labelling.html"><a href="labelling.html#variables"><i class="fa fa-check"></i><b>11.1</b> Variables</a></li>
+<li class="chapter" data-level="11.2" data-path="labelling.html"><a href="labelling.html#exercise-13"><i class="fa fa-check"></i><b>11.2</b> Exercise</a></li>
+<li class="chapter" data-level="11.3" data-path="labelling.html"><a href="labelling.html#values"><i class="fa fa-check"></i><b>11.3</b> Values</a></li>
+<li class="chapter" data-level="11.4" data-path="labelling.html"><a href="labelling.html#exercise-14"><i class="fa fa-check"></i><b>11.4</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="some-exploratory-analysis.html"><a href="some-exploratory-analysis.html"><i class="fa fa-check"></i><b>12</b> Some exploratory analysis</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="some-exploratory-analysis.html"><a href="some-exploratory-analysis.html#simple-visualisations"><i class="fa fa-check"></i><b>12.1</b> Simple visualisations</a></li>
+<li class="chapter" data-level="12.2" data-path="some-exploratory-analysis.html"><a href="some-exploratory-analysis.html#exercise-15"><i class="fa fa-check"></i><b>12.2</b> Exercise</a></li>
+<li class="chapter" data-level="12.3" data-path="some-exploratory-analysis.html"><a href="some-exploratory-analysis.html#summary-statistics"><i class="fa fa-check"></i><b>12.3</b> Summary statistics</a></li>
+<li class="chapter" data-level="12.4" data-path="some-exploratory-analysis.html"><a href="some-exploratory-analysis.html#exercise-16"><i class="fa fa-check"></i><b>12.4</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="tables.html"><a href="tables.html"><i class="fa fa-check"></i><b>13</b> Tables</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="tables.html"><a href="tables.html#tables-with-custom-statistics"><i class="fa fa-check"></i><b>13.1</b> Tables with custom statistics</a></li>
+<li class="chapter" data-level="13.2" data-path="tables.html"><a href="tables.html#customized-tables"><i class="fa fa-check"></i><b>13.2</b> Customized tables</a>
+<ul>
+<li class="chapter" data-level="13.2.1" data-path="tables.html"><a href="tables.html#a-tabulation-with-customized-layout"><i class="fa fa-check"></i><b>13.2.1</b> A <strong>tabulation</strong> with customized layout</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="some-simple-graph-scripts.html"><a href="some-simple-graph-scripts.html"><i class="fa fa-check"></i><b>14</b> Some simple graph scripts</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="some-simple-graph-scripts.html"><a href="some-simple-graph-scripts.html#introduction-1"><i class="fa fa-check"></i><b>14.1</b> Introduction</a></li>
+<li class="chapter" data-level="14.2" data-path="some-simple-graph-scripts.html"><a href="some-simple-graph-scripts.html#what-will-you-learn"><i class="fa fa-check"></i><b>14.2</b> What will you learn?</a></li>
+<li class="chapter" data-level="14.3" data-path="some-simple-graph-scripts.html"><a href="some-simple-graph-scripts.html#exercise-17"><i class="fa fa-check"></i><b>14.3</b> Exercise</a></li>
+<li class="chapter" data-level="14.4" data-path="some-simple-graph-scripts.html"><a href="some-simple-graph-scripts.html#basic-types-of-r-graph"><i class="fa fa-check"></i><b>14.4</b> Basic types of R graph</a></li>
+<li class="chapter" data-level="14.5" data-path="some-simple-graph-scripts.html"><a href="some-simple-graph-scripts.html#the-basic-graph-command-and-some-simple-examples"><i class="fa fa-check"></i><b>14.5</b> The basic <code>graph</code> command and some simple examples</a></li>
+<li class="chapter" data-level="14.6" data-path="some-simple-graph-scripts.html"><a href="some-simple-graph-scripts.html#exercise-18"><i class="fa fa-check"></i><b>14.6</b> Exercise</a></li>
+<li class="chapter" data-level="14.7" data-path="some-simple-graph-scripts.html"><a href="some-simple-graph-scripts.html#creating-a-graph-adding-elements-and-changing-defaults-box-plot-example"><i class="fa fa-check"></i><b>14.7</b> Creating a graph adding elements and changing defaults: box plot example</a></li>
+<li class="chapter" data-level="14.8" data-path="some-simple-graph-scripts.html"><a href="some-simple-graph-scripts.html#exercise-19"><i class="fa fa-check"></i><b>14.8</b> Exercise</a></li>
+<li class="chapter" data-level="14.9" data-path="some-simple-graph-scripts.html"><a href="some-simple-graph-scripts.html#adornments"><i class="fa fa-check"></i><b>14.9</b> Adornments</a></li>
+<li class="chapter" data-level="14.10" data-path="some-simple-graph-scripts.html"><a href="some-simple-graph-scripts.html#exercise-20"><i class="fa fa-check"></i><b>14.10</b> Exercise</a></li>
+<li class="chapter" data-level="14.11" data-path="some-simple-graph-scripts.html"><a href="some-simple-graph-scripts.html#subset-the-data"><i class="fa fa-check"></i><b>14.11</b> Subset the data</a></li>
+<li class="chapter" data-level="14.12" data-path="some-simple-graph-scripts.html"><a href="some-simple-graph-scripts.html#exporting-the-graph-to-word-from-your-script"><i class="fa fa-check"></i><b>14.12</b> Exporting the graph to Word from your script</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="larger-exercises-part-i.html"><a href="larger-exercises-part-i.html"><i class="fa fa-check"></i><b>15</b> Larger Exercises Part I</a></li>
+<li class="chapter" data-level="16" data-path="hypothesis-tests.html"><a href="hypothesis-tests.html"><i class="fa fa-check"></i><b>16</b> Hypothesis tests</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="hypothesis-tests.html"><a href="hypothesis-tests.html#for-two-categorical-variables"><i class="fa fa-check"></i><b>16.1</b> For two categorical variables</a></li>
+<li class="chapter" data-level="16.2" data-path="hypothesis-tests.html"><a href="hypothesis-tests.html#exercise-21"><i class="fa fa-check"></i><b>16.2</b> Exercise</a></li>
+<li class="chapter" data-level="16.3" data-path="hypothesis-tests.html"><a href="hypothesis-tests.html#for-one-continuous-and-one-categorical-variable-of-two-levels"><i class="fa fa-check"></i><b>16.3</b> For one continuous and one categorical variable of two levels</a></li>
+<li class="chapter" data-level="16.4" data-path="hypothesis-tests.html"><a href="hypothesis-tests.html#exercise-22"><i class="fa fa-check"></i><b>16.4</b> Exercise</a></li>
+<li class="chapter" data-level="16.5" data-path="hypothesis-tests.html"><a href="hypothesis-tests.html#the-paired-samples-ttest"><i class="fa fa-check"></i><b>16.5</b> The paired samples ttest</a></li>
+<li class="chapter" data-level="16.6" data-path="hypothesis-tests.html"><a href="hypothesis-tests.html#once-continuous-and-one-categorical-variable-of-more-than-two-levels"><i class="fa fa-check"></i><b>16.6</b> Once continuous and one categorical variable of more than two levels</a>
+<ul>
+<li class="chapter" data-level="16.6.1" data-path="hypothesis-tests.html"><a href="hypothesis-tests.html#one-way-anova-and-post-hoc-testing"><i class="fa fa-check"></i><b>16.6.1</b> One way ANOVA and post-hoc testing</a></li>
+</ul></li>
+<li class="chapter" data-level="16.7" data-path="hypothesis-tests.html"><a href="hypothesis-tests.html#two-continuous-variables"><i class="fa fa-check"></i><b>16.7</b> Two continuous variables</a></li>
+<li class="chapter" data-level="16.8" data-path="hypothesis-tests.html"><a href="hypothesis-tests.html#correlation"><i class="fa fa-check"></i><b>16.8</b> Correlation</a></li>
+<li class="chapter" data-level="16.9" data-path="hypothesis-tests.html"><a href="hypothesis-tests.html#exercise-23"><i class="fa fa-check"></i><b>16.9</b> Exercise</a>
+<ul>
+<li class="chapter" data-level="16.9.1" data-path="hypothesis-tests.html"><a href="hypothesis-tests.html#simple-visualisation-of-correlation"><i class="fa fa-check"></i><b>16.9.1</b> Simple visualisation of correlation</a></li>
+</ul></li>
+<li class="chapter" data-level="16.10" data-path="hypothesis-tests.html"><a href="hypothesis-tests.html#exercise-24"><i class="fa fa-check"></i><b>16.10</b> Exercise</a></li>
+<li class="chapter" data-level="16.11" data-path="hypothesis-tests.html"><a href="hypothesis-tests.html#simple-linear-regression"><i class="fa fa-check"></i><b>16.11</b> Simple Linear Regression</a></li>
+<li class="chapter" data-level="16.12" data-path="hypothesis-tests.html"><a href="hypothesis-tests.html#exercise-25"><i class="fa fa-check"></i><b>16.12</b> Exercise</a></li>
+<li class="chapter" data-level="16.13" data-path="hypothesis-tests.html"><a href="hypothesis-tests.html#multiple-linear-regression"><i class="fa fa-check"></i><b>16.13</b> Multiple linear regression</a></li>
+<li class="chapter" data-level="16.14" data-path="hypothesis-tests.html"><a href="hypothesis-tests.html#exercise-26"><i class="fa fa-check"></i><b>16.14</b> Exercise</a></li>
+<li class="chapter" data-level="16.15" data-path="hypothesis-tests.html"><a href="hypothesis-tests.html#regression-with-categorical-variables"><i class="fa fa-check"></i><b>16.15</b> Regression with categorical variables</a></li>
+<li class="chapter" data-level="16.16" data-path="hypothesis-tests.html"><a href="hypothesis-tests.html#exercise-27"><i class="fa fa-check"></i><b>16.16</b> Exercise</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Manipulation and Analysis in R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="detecting-and-correcting" class="section level1 hasAnchor" number="8">
+<h1><span class="header-section-number">8</span> Detecting and correcting<a href="detecting-and-correcting.html#detecting-and-correcting" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>In the data as you find it, there is an anomalous maths score. We can find this by simple inspection of the data because we have a small data set and few variables.</p>
+<p>We could for example use <code>list</code> with an <code>if</code> condition, like this</p>
+<pre><code>list surname maths if maths &gt; 100 </code></pre>
+<p>which would list any cases with a <code>maths</code> value greater than the allowable maximum.</p>
+<p>The <strong>comparison operator</strong> we use here is <strong>greater than</strong>. We must remember that the operator for <strong>equals</strong> is <strong>==</strong>.</p>
+<p>If we had a larger data set with many variables this would be much more difficult. We will write some code to help us in the detection of variables.</p>
+<p>In R we can use programming functions that return values<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>. Many functions return values <strong>true</strong> or <strong>false</strong>. There is a function <strong>inrange(variable, min, max)</strong> that returns true if <em>variable</em> is greater than <em>min</em> and less than or equal to <em>max</em>. We negate functions with the operator meaning <strong>not</strong>: <strong>!</strong>.</p>
+<div id="exercise-6" class="section level2 hasAnchor" number="8.1">
+<h2><span class="header-section-number">8.1</span> Exercise<a href="detecting-and-correcting.html#exercise-6" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In your script add the following lines:</p>
+<pre><code>gen anomaly = 0
+replace anomaly = 1 if !inrange(maths,0,100)</code></pre>
+<p>The R command <code>gen</code> creates a new variable in our data set (for all cases) and gives it an initial value. The command <code>repace</code> replaces the values for cases of a variable - in this case with a condition.</p>
+</div>
+<div id="exercise-7" class="section level2 hasAnchor" number="8.2">
+<h2><span class="header-section-number">8.2</span> Exercise<a href="detecting-and-correcting.html#exercise-7" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>After you run the lines above, use <code>list</code> with <code>if</code> to determine if there are any anomalous cases in your data set. Have you detected any? How many?</p>
+<p>The R symbol for or is <strong>|</strong>, sometimes called bar or pipe. In R you can create a complex condition (like <code>if</code>) with the pipe, but note that each side of the pipe must be a <strong>complete R statement</strong>. So, if we consider a comparison with English, you must say:</p>
+<p>“Would you like coffee or would you like tea?”</p>
+<p>and not</p>
+<p>“Would you like coffee or tea?”</p>
+<p>List all cases where <code>maths &lt; 50</code> or <code>maths &gt; 60</code>.</p>
+<p>Alter the second line in the previous exercise example above (the <code>replace</code> clause) so that it checks not only <code>maths</code> but the <code>english</code>, and <code>history</code> variables as well.</p>
+</div>
+<div id="replacing-values" class="section level2 hasAnchor" number="8.3">
+<h2><span class="header-section-number">8.3</span> Replacing values<a href="detecting-and-correcting.html#replacing-values" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In the data for this tutorial, there is one score in <code>maths</code> that is clearly out of range. In this case we need to replace the <code>maths</code> score for the student with <code>surname</code> DENCIK. We can do that on the R command line with a replace command. For the sake of this exercise, snapshot the current state of your data with <code>preserve</code> and then type this command on the console:</p>
+<pre><code>replace maths = 57 if surname == &quot;DENCIK&quot;</code></pre>
+<p>When you have inspected the data to ensure the correction has been made, <code>restore</code> the snapshot from before correction (This is to ensure that you can complete the next exercise. In a normal situtation you might preserve only at the end of your analysis or simply not save the results of changes you make to your data).</p>
+</div>
+<div id="exercise-8" class="section level2 hasAnchor" number="8.4">
+<h2><span class="header-section-number">8.4</span> Exercise<a href="detecting-and-correcting.html#exercise-8" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Correct the anomalous <code>maths</code> score, but do not base the replacement on the <code>surname</code> variable, rather use only the <code>maths</code> values.</p>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="2">
+<li id="fn2"><p>See <a href="https://www.R.com/manuals/fn.pdf" title="R 17 Manual, Functions">R 17 Manual: Functions</a><a href="detecting-and-correcting.html#fnref2" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="listing-and-sorting.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="generating-new-values-and-recoding-existing-values.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="assets/gitbook-2.6.7/js/app.min.js"></script>
+<script src="assets/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="assets/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+},
+"toolbar": {
+"position": "static"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

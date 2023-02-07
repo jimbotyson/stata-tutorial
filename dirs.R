@@ -1,0 +1,11 @@
+dir.create('ProjectName')
+setwd('ProjectName')
+dir.create('raw_data')
+dir.create('scripts')
+dir.create('documentation')
+dir.create('graphs')
+dir.create('PDFs')
+dir.create('Word_docs')
+setwd('..')
+getwd()
+           

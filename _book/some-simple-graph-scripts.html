@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>14 Some simple graph scripts | Data Manipulation and Analysis in R</title>
+  <meta name="description" content="14 Some simple graph scripts | Data Manipulation and Analysis in R" />
+  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="14 Some simple graph scripts | Data Manipulation and Analysis in R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta name="github-repo" content="jimbotyson/RTutorial" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="14 Some simple graph scripts | Data Manipulation and Analysis in R" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="tables.html"/>
+<link rel="next" href="larger-exercises-part-i.html"/>
+<script src="assets/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="assets/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="assets/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="assets/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="acknowledgments.html"><a href="acknowledgments.html"><i class="fa fa-check"></i><b>2</b> Acknowledgments</a></li>
+<li class="chapter" data-level="3" data-path="getting-started.html"><a href="getting-started.html"><i class="fa fa-check"></i><b>3</b> Getting Started</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="getting-started.html"><a href="getting-started.html#prerequisites"><i class="fa fa-check"></i><b>3.1</b> Prerequisites</a></li>
+<li class="chapter" data-level="3.2" data-path="getting-started.html"><a href="getting-started.html#software-requirements"><i class="fa fa-check"></i><b>3.2</b> Software Requirements</a></li>
+<li class="chapter" data-level="3.3" data-path="getting-started.html"><a href="getting-started.html#how-to-use-these-materials"><i class="fa fa-check"></i><b>3.3</b> How to use these materials</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="getting-started.html"><a href="getting-started.html#the-larger-exercises"><i class="fa fa-check"></i><b>3.3.1</b> The Larger Exercises</a></li>
+<li class="chapter" data-level="3.3.2" data-path="getting-started.html"><a href="getting-started.html#skippable"><i class="fa fa-check"></i><b>3.3.2</b> Skippable</a></li>
+<li class="chapter" data-level="3.3.3" data-path="getting-started.html"><a href="getting-started.html#general-advice"><i class="fa fa-check"></i><b>3.3.3</b> General advice</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="getting-started.html"><a href="getting-started.html#data"><i class="fa fa-check"></i><b>3.4</b> Data</a></li>
+<li class="chapter" data-level="3.5" data-path="getting-started.html"><a href="getting-started.html#reference-material"><i class="fa fa-check"></i><b>3.5</b> Reference material</a></li>
+<li class="chapter" data-level="3.6" data-path="getting-started.html"><a href="getting-started.html#to-be-added"><i class="fa fa-check"></i><b>3.6</b> To be added</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="some-r-use-basics.html"><a href="some-r-use-basics.html"><i class="fa fa-check"></i><b>4</b> Some R use basics</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="some-r-use-basics.html"><a href="some-r-use-basics.html#folders"><i class="fa fa-check"></i><b>4.1</b> Folders</a></li>
+<li class="chapter" data-level="4.2" data-path="some-r-use-basics.html"><a href="some-r-use-basics.html#exercise"><i class="fa fa-check"></i><b>4.2</b> Exercise</a></li>
+<li class="chapter" data-level="4.3" data-path="some-r-use-basics.html"><a href="some-r-use-basics.html#exercise-1"><i class="fa fa-check"></i><b>4.3</b> Exercise</a></li>
+<li class="chapter" data-level="4.4" data-path="some-r-use-basics.html"><a href="some-r-use-basics.html#common-file-types"><i class="fa fa-check"></i><b>4.4</b> Common File types</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="the-r-file.html"><a href="the-r-file.html"><i class="fa fa-check"></i><b>5</b> The R file</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="the-r-file.html"><a href="the-r-file.html#initialising-your-script"><i class="fa fa-check"></i><b>5.1</b> Initialising your script</a></li>
+<li class="chapter" data-level="5.2" data-path="the-r-file.html"><a href="the-r-file.html#exercise-2"><i class="fa fa-check"></i><b>5.2</b> Exercise</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="the-r-file.html"><a href="the-r-file.html#solution"><i class="fa fa-check"></i><b>5.2.1</b> Solution</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="the-r-file.html"><a href="the-r-file.html#which-directory"><i class="fa fa-check"></i><b>5.3</b> Which directory?</a></li>
+<li class="chapter" data-level="5.4" data-path="the-r-file.html"><a href="the-r-file.html#change-to-your-data-directory"><i class="fa fa-check"></i><b>5.4</b> Change to your data directory</a></li>
+<li class="chapter" data-level="5.5" data-path="the-r-file.html"><a href="the-r-file.html#exercise-3"><i class="fa fa-check"></i><b>5.5</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="dataset.html"><a href="dataset.html"><i class="fa fa-check"></i><b>6</b> Dataset</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="dataset.html"><a href="dataset.html#data-types"><i class="fa fa-check"></i><b>6.1</b> Data Types</a></li>
+<li class="chapter" data-level="6.2" data-path="dataset.html"><a href="dataset.html#interpretation-of-describe-output"><i class="fa fa-check"></i><b>6.2</b> Interpretation of <code>describe</code> output</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="dataset.html"><a href="dataset.html#storage-type"><i class="fa fa-check"></i><b>6.2.1</b> Storage type</a></li>
+<li class="chapter" data-level="6.2.2" data-path="dataset.html"><a href="dataset.html#format-types"><i class="fa fa-check"></i><b>6.2.2</b> Format types</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="dataset.html"><a href="dataset.html#interpretation-of-codebook"><i class="fa fa-check"></i><b>6.3</b> Interpretation of codebook</a></li>
+<li class="chapter" data-level="6.4" data-path="dataset.html"><a href="dataset.html#exercise-4"><i class="fa fa-check"></i><b>6.4</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="listing-and-sorting.html"><a href="listing-and-sorting.html"><i class="fa fa-check"></i><b>7</b> Listing and Sorting</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="listing-and-sorting.html"><a href="listing-and-sorting.html#listing-cases"><i class="fa fa-check"></i><b>7.1</b> Listing cases</a></li>
+<li class="chapter" data-level="7.2" data-path="listing-and-sorting.html"><a href="listing-and-sorting.html#exercise-5"><i class="fa fa-check"></i><b>7.2</b> Exercise</a></li>
+<li class="chapter" data-level="7.3" data-path="listing-and-sorting.html"><a href="listing-and-sorting.html#sorting"><i class="fa fa-check"></i><b>7.3</b> Sorting</a></li>
+<li class="chapter" data-level="7.4" data-path="listing-and-sorting.html"><a href="listing-and-sorting.html#gsort"><i class="fa fa-check"></i><b>7.4</b> <code>gsort</code></a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="detecting-and-correcting.html"><a href="detecting-and-correcting.html"><i class="fa fa-check"></i><b>8</b> Detecting and correcting</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="detecting-and-correcting.html"><a href="detecting-and-correcting.html#exercise-6"><i class="fa fa-check"></i><b>8.1</b> Exercise</a></li>
+<li class="chapter" data-level="8.2" data-path="detecting-and-correcting.html"><a href="detecting-and-correcting.html#exercise-7"><i class="fa fa-check"></i><b>8.2</b> Exercise</a></li>
+<li class="chapter" data-level="8.3" data-path="detecting-and-correcting.html"><a href="detecting-and-correcting.html#replacing-values"><i class="fa fa-check"></i><b>8.3</b> Replacing values</a></li>
+<li class="chapter" data-level="8.4" data-path="detecting-and-correcting.html"><a href="detecting-and-correcting.html#exercise-8"><i class="fa fa-check"></i><b>8.4</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="generating-new-values-and-recoding-existing-values.html"><a href="generating-new-values-and-recoding-existing-values.html"><i class="fa fa-check"></i><b>9</b> Generating new values and recoding existing values</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="generating-new-values-and-recoding-existing-values.html"><a href="generating-new-values-and-recoding-existing-values.html#new-values"><i class="fa fa-check"></i><b>9.1</b> New values</a></li>
+<li class="chapter" data-level="9.2" data-path="generating-new-values-and-recoding-existing-values.html"><a href="generating-new-values-and-recoding-existing-values.html#exercise-9"><i class="fa fa-check"></i><b>9.2</b> Exercise</a></li>
+<li class="chapter" data-level="9.3" data-path="generating-new-values-and-recoding-existing-values.html"><a href="generating-new-values-and-recoding-existing-values.html#recoding-values"><i class="fa fa-check"></i><b>9.3</b> Recoding values</a></li>
+<li class="chapter" data-level="9.4" data-path="generating-new-values-and-recoding-existing-values.html"><a href="generating-new-values-and-recoding-existing-values.html#exercise-10"><i class="fa fa-check"></i><b>9.4</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="selecting.html"><a href="selecting.html"><i class="fa fa-check"></i><b>10</b> Selecting</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="selecting.html"><a href="selecting.html#selecting-variables"><i class="fa fa-check"></i><b>10.1</b> Selecting variables</a></li>
+<li class="chapter" data-level="10.2" data-path="selecting.html"><a href="selecting.html#exercise-11"><i class="fa fa-check"></i><b>10.2</b> Exercise</a></li>
+<li class="chapter" data-level="10.3" data-path="selecting.html"><a href="selecting.html#selecting-cases"><i class="fa fa-check"></i><b>10.3</b> Selecting cases</a></li>
+<li class="chapter" data-level="10.4" data-path="selecting.html"><a href="selecting.html#using-a-filter-variable"><i class="fa fa-check"></i><b>10.4</b> Using a filter variable</a></li>
+<li class="chapter" data-level="10.5" data-path="selecting.html"><a href="selecting.html#the-uses-of-_all"><i class="fa fa-check"></i><b>10.5</b> The uses of _all</a></li>
+<li class="chapter" data-level="10.6" data-path="selecting.html"><a href="selecting.html#exercise-12"><i class="fa fa-check"></i><b>10.6</b> Exercise</a></li>
+<li class="chapter" data-level="10.7" data-path="selecting.html"><a href="selecting.html#creating-a-custom-variable-list"><i class="fa fa-check"></i><b>10.7</b> Creating a custom variable list</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="labelling.html"><a href="labelling.html"><i class="fa fa-check"></i><b>11</b> Labelling</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="labelling.html"><a href="labelling.html#variables"><i class="fa fa-check"></i><b>11.1</b> Variables</a></li>
+<li class="chapter" data-level="11.2" data-path="labelling.html"><a href="labelling.html#exercise-13"><i class="fa fa-check"></i><b>11.2</b> Exercise</a></li>
+<li class="chapter" data-level="11.3" data-path="labelling.html"><a href="labelling.html#values"><i class="fa fa-check"></i><b>11.3</b> Values</a></li>
+<li class="chapter" data-level="11.4" data-path="labelling.html"><a href="labelling.html#exercise-14"><i class="fa fa-check"></i><b>11.4</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="some-exploratory-analysis.html"><a href="some-exploratory-analysis.html"><i class="fa fa-check"></i><b>12</b> Some exploratory analysis</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="some-exploratory-analysis.html"><a href="some-exploratory-analysis.html#simple-visualisations"><i class="fa fa-check"></i><b>12.1</b> Simple visualisations</a></li>
+<li class="chapter" data-level="12.2" data-path="some-exploratory-analysis.html"><a href="some-exploratory-analysis.html#exercise-15"><i class="fa fa-check"></i><b>12.2</b> Exercise</a></li>
+<li class="chapter" data-level="12.3" data-path="some-exploratory-analysis.html"><a href="some-exploratory-analysis.html#summary-statistics"><i class="fa fa-check"></i><b>12.3</b> Summary statistics</a></li>
+<li class="chapter" data-level="12.4" data-path="some-exploratory-analysis.html"><a href="some-exploratory-analysis.html#exercise-16"><i class="fa fa-check"></i><b>12.4</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="tables.html"><a href="tables.html"><i class="fa fa-check"></i><b>13</b> Tables</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="tables.html"><a href="tables.html#tables-with-custom-statistics"><i class="fa fa-check"></i><b>13.1</b> Tables with custom statistics</a></li>
+<li class="chapter" data-level="13.2" data-path="tables.html"><a href="tables.html#customized-tables"><i class="fa fa-check"></i><b>13.2</b> Customized tables</a>
+<ul>
+<li class="chapter" data-level="13.2.1" data-path="tables.html"><a href="tables.html#a-tabulation-with-customized-layout"><i class="fa fa-check"></i><b>13.2.1</b> A <strong>tabulation</strong> with customized layout</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="some-simple-graph-scripts.html"><a href="some-simple-graph-scripts.html"><i class="fa fa-check"></i><b>14</b> Some simple graph scripts</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="some-simple-graph-scripts.html"><a href="some-simple-graph-scripts.html#introduction-1"><i class="fa fa-check"></i><b>14.1</b> Introduction</a></li>
+<li class="chapter" data-level="14.2" data-path="some-simple-graph-scripts.html"><a href="some-simple-graph-scripts.html#what-will-you-learn"><i class="fa fa-check"></i><b>14.2</b> What will you learn?</a></li>
+<li class="chapter" data-level="14.3" data-path="some-simple-graph-scripts.html"><a href="some-simple-graph-scripts.html#exercise-17"><i class="fa fa-check"></i><b>14.3</b> Exercise</a></li>
+<li class="chapter" data-level="14.4" data-path="some-simple-graph-scripts.html"><a href="some-simple-graph-scripts.html#basic-types-of-r-graph"><i class="fa fa-check"></i><b>14.4</b> Basic types of R graph</a></li>
+<li class="chapter" data-level="14.5" data-path="some-simple-graph-scripts.html"><a href="some-simple-graph-scripts.html#the-basic-graph-command-and-some-simple-examples"><i class="fa fa-check"></i><b>14.5</b> The basic <code>graph</code> command and some simple examples</a></li>
+<li class="chapter" data-level="14.6" data-path="some-simple-graph-scripts.html"><a href="some-simple-graph-scripts.html#exercise-18"><i class="fa fa-check"></i><b>14.6</b> Exercise</a></li>
+<li class="chapter" data-level="14.7" data-path="some-simple-graph-scripts.html"><a href="some-simple-graph-scripts.html#creating-a-graph-adding-elements-and-changing-defaults-box-plot-example"><i class="fa fa-check"></i><b>14.7</b> Creating a graph adding elements and changing defaults: box plot example</a></li>
+<li class="chapter" data-level="14.8" data-path="some-simple-graph-scripts.html"><a href="some-simple-graph-scripts.html#exercise-19"><i class="fa fa-check"></i><b>14.8</b> Exercise</a></li>
+<li class="chapter" data-level="14.9" data-path="some-simple-graph-scripts.html"><a href="some-simple-graph-scripts.html#adornments"><i class="fa fa-check"></i><b>14.9</b> Adornments</a></li>
+<li class="chapter" data-level="14.10" data-path="some-simple-graph-scripts.html"><a href="some-simple-graph-scripts.html#exercise-20"><i class="fa fa-check"></i><b>14.10</b> Exercise</a></li>
+<li class="chapter" data-level="14.11" data-path="some-simple-graph-scripts.html"><a href="some-simple-graph-scripts.html#subset-the-data"><i class="fa fa-check"></i><b>14.11</b> Subset the data</a></li>
+<li class="chapter" data-level="14.12" data-path="some-simple-graph-scripts.html"><a href="some-simple-graph-scripts.html#exporting-the-graph-to-word-from-your-script"><i class="fa fa-check"></i><b>14.12</b> Exporting the graph to Word from your script</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="larger-exercises-part-i.html"><a href="larger-exercises-part-i.html"><i class="fa fa-check"></i><b>15</b> Larger Exercises Part I</a></li>
+<li class="chapter" data-level="16" data-path="hypothesis-tests.html"><a href="hypothesis-tests.html"><i class="fa fa-check"></i><b>16</b> Hypothesis tests</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="hypothesis-tests.html"><a href="hypothesis-tests.html#for-two-categorical-variables"><i class="fa fa-check"></i><b>16.1</b> For two categorical variables</a></li>
+<li class="chapter" data-level="16.2" data-path="hypothesis-tests.html"><a href="hypothesis-tests.html#exercise-21"><i class="fa fa-check"></i><b>16.2</b> Exercise</a></li>
+<li class="chapter" data-level="16.3" data-path="hypothesis-tests.html"><a href="hypothesis-tests.html#for-one-continuous-and-one-categorical-variable-of-two-levels"><i class="fa fa-check"></i><b>16.3</b> For one continuous and one categorical variable of two levels</a></li>
+<li class="chapter" data-level="16.4" data-path="hypothesis-tests.html"><a href="hypothesis-tests.html#exercise-22"><i class="fa fa-check"></i><b>16.4</b> Exercise</a></li>
+<li class="chapter" data-level="16.5" data-path="hypothesis-tests.html"><a href="hypothesis-tests.html#the-paired-samples-ttest"><i class="fa fa-check"></i><b>16.5</b> The paired samples ttest</a></li>
+<li class="chapter" data-level="16.6" data-path="hypothesis-tests.html"><a href="hypothesis-tests.html#once-continuous-and-one-categorical-variable-of-more-than-two-levels"><i class="fa fa-check"></i><b>16.6</b> Once continuous and one categorical variable of more than two levels</a>
+<ul>
+<li class="chapter" data-level="16.6.1" data-path="hypothesis-tests.html"><a href="hypothesis-tests.html#one-way-anova-and-post-hoc-testing"><i class="fa fa-check"></i><b>16.6.1</b> One way ANOVA and post-hoc testing</a></li>
+</ul></li>
+<li class="chapter" data-level="16.7" data-path="hypothesis-tests.html"><a href="hypothesis-tests.html#two-continuous-variables"><i class="fa fa-check"></i><b>16.7</b> Two continuous variables</a></li>
+<li class="chapter" data-level="16.8" data-path="hypothesis-tests.html"><a href="hypothesis-tests.html#correlation"><i class="fa fa-check"></i><b>16.8</b> Correlation</a></li>
+<li class="chapter" data-level="16.9" data-path="hypothesis-tests.html"><a href="hypothesis-tests.html#exercise-23"><i class="fa fa-check"></i><b>16.9</b> Exercise</a>
+<ul>
+<li class="chapter" data-level="16.9.1" data-path="hypothesis-tests.html"><a href="hypothesis-tests.html#simple-visualisation-of-correlation"><i class="fa fa-check"></i><b>16.9.1</b> Simple visualisation of correlation</a></li>
+</ul></li>
+<li class="chapter" data-level="16.10" data-path="hypothesis-tests.html"><a href="hypothesis-tests.html#exercise-24"><i class="fa fa-check"></i><b>16.10</b> Exercise</a></li>
+<li class="chapter" data-level="16.11" data-path="hypothesis-tests.html"><a href="hypothesis-tests.html#simple-linear-regression"><i class="fa fa-check"></i><b>16.11</b> Simple Linear Regression</a></li>
+<li class="chapter" data-level="16.12" data-path="hypothesis-tests.html"><a href="hypothesis-tests.html#exercise-25"><i class="fa fa-check"></i><b>16.12</b> Exercise</a></li>
+<li class="chapter" data-level="16.13" data-path="hypothesis-tests.html"><a href="hypothesis-tests.html#multiple-linear-regression"><i class="fa fa-check"></i><b>16.13</b> Multiple linear regression</a></li>
+<li class="chapter" data-level="16.14" data-path="hypothesis-tests.html"><a href="hypothesis-tests.html#exercise-26"><i class="fa fa-check"></i><b>16.14</b> Exercise</a></li>
+<li class="chapter" data-level="16.15" data-path="hypothesis-tests.html"><a href="hypothesis-tests.html#regression-with-categorical-variables"><i class="fa fa-check"></i><b>16.15</b> Regression with categorical variables</a></li>
+<li class="chapter" data-level="16.16" data-path="hypothesis-tests.html"><a href="hypothesis-tests.html#exercise-27"><i class="fa fa-check"></i><b>16.16</b> Exercise</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Manipulation and Analysis in R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="some-simple-graph-scripts" class="section level1 hasAnchor" number="14">
+<h1><span class="header-section-number">14</span> Some simple graph scripts<a href="some-simple-graph-scripts.html#some-simple-graph-scripts" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="introduction-1" class="section level2 hasAnchor" number="14.1">
+<h2><span class="header-section-number">14.1</span> Introduction<a href="some-simple-graph-scripts.html#introduction-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>R graphing is <strong>easy</strong> if you use the interactive graph editor.</p>
+<p>R graphing is <strong>hard</strong> if you script. The documentation is exhaustive and highly structured. And a complete rabbit hole. The cheatsheet is a great help!</p>
+<p>You should script because graphs that are scripted are</p>
+<ul>
+<li>repeatable;</li>
+<li>modifiable;</li>
+<li>programmatically exportable to Word, HTML and so on.</li>
+</ul>
+<p>The problem is remembering both the huge variety of options available (1,700?) to what are at base a small number of basic graphing commands, and knowing which options can apply to which graph types. I haven’t mastered either of these issues.</p>
+<p>The <a href="https://www.dropbox.com/s/689lovb5vf5meyt/Rcheatsheets.pdf?dl=0">cheat sheets</a> really help.</p>
+<p><a href="https://www.dropbox.com/s/689lovb5vf5meyt/Rcheatsheets.pdf?dl=0" class="uri">https://www.dropbox.com/s/689lovb5vf5meyt/Rcheatsheets.pdf?dl=0</a></p>
+<p>Instead, I want to show you some simpler and then some slightly more complicated graph scripts with explanations of the options and then explain how to export your output to reports.</p>
+</div>
+<div id="what-will-you-learn" class="section level2 hasAnchor" number="14.2">
+<h2><span class="header-section-number">14.2</span> What will you learn?<a href="some-simple-graph-scripts.html#what-will-you-learn" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We will cover some basic graph editing using the graph editor/menus, just to get an idea of what R graphs can look like and some of the options we can change.</p>
+<p>We will then cover creating and modifying graphs in scripts including adding adornment to graphs, such as titles, subtitles, notes and captions, modifiying appearance such as the shape and colour of markers and using <code>by()</code>, <code>over()</code> and <code>separate</code> to produce facted and subplots and to selectively modify graph objects. You will also be introduced to the very basics of R’s graph schemes.</p>
+<p>Finally you will learn the effective way to export graphs from scripts to Word documents and how to create several graphs and export them in a script loop.</p>
+<p>So, first, we will look at using the graph editor to understand the alternative to scripting.</p>
+</div>
+<div id="exercise-17" class="section level2 hasAnchor" number="14.3">
+<h2><span class="header-section-number">14.3</span> Exercise<a href="some-simple-graph-scripts.html#exercise-17" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Import the data from</p>
+<pre><code>https://www.ucl.ac.uk/~ccaajim/medtrial.csv&quot;</code></pre>
+<p>using the R procedure <code>import delimited</code>.</p>
+<p>Use the following code to add value labels to the variable <code>gender</code>:</p>
+<pre><code> label define genderl 1 &quot;Male&quot; 2 &quot;Female&quot;
+ label values gender genderl</code></pre>
+<p>Use the commands <code>desc</code> and <code>codebook</code> to examine the data set.</p>
+<p>Use the R <code>grahics</code> menu to make the following plots:</p>
+<ul>
+<li>a pie chart of frequencies of <code>gender</code></li>
+<li>a bar chart of frequencies of <code>smoker</code></li>
+<li>a histogram of <code>hbefore</code></li>
+<li>a histogram of <code>hafter</code> with subplots by <code>gender</code></li>
+<li></li>
+</ul>
+<p>For the last of these, with the graph window open, open the graph editor and change the colour of the bars (plotregion 1, plot 1) and the bar borders to reddish. Save the plot to a <code>png</code> file.</p>
+</div>
+<div id="basic-types-of-r-graph" class="section level2 hasAnchor" number="14.4">
+<h2><span class="header-section-number">14.4</span> Basic types of R graph<a href="some-simple-graph-scripts.html#basic-types-of-r-graph" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>twoway plots
+<ul>
+<li>scatterplots;</li>
+<li>line plots;</li>
+<li>fit plots;</li>
+<li>fit plots with confidence intervals;</li>
+<li>area plots;</li>
+<li>bar plots;</li>
+<li>range plots;</li>
+<li>distribution plots</li>
+</ul></li>
+<li>scatterplot matrices</li>
+<li>bar charts</li>
+<li>box plots</li>
+<li>dot plots</li>
+<li>pie charts</li>
+</ul>
+</div>
+<div id="the-basic-graph-command-and-some-simple-examples" class="section level2 hasAnchor" number="14.5">
+<h2><span class="header-section-number">14.5</span> The basic <code>graph</code> command and some simple examples<a href="some-simple-graph-scripts.html#the-basic-graph-command-and-some-simple-examples" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The most basic command for creating graphs and charts in R is <code>graph</code>. This command has a number of sub-commands and options. The major sub-commands describe different varieties of plot - such as twoway, box plot, and the sub-types of twoway such as scatter and line. (For some reason there is also a small collection of graphs that are independent of either <code>graph</code> or <code>twoway</code> including <code>histogram</code>.)</p>
+</div>
+<div id="exercise-18" class="section level2 hasAnchor" number="14.6">
+<h2><span class="header-section-number">14.6</span> Exercise<a href="some-simple-graph-scripts.html#exercise-18" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Create a new do file and add the following lines of code:</p>
+<pre><code>sysuse auto, clear
+hist mpg</code></pre>
+<div class="figure">
+<img src="./images/mpghist1.png" title="A simple histogram of the mpg variable from dataset auto." alt="" />
+<p class="caption">A simple histogram of the mpg variable from data set auto.</p>
+</div>
+<p>Open the graph editor and change the background colour of the graph.</p>
+</div>
+<div id="creating-a-graph-adding-elements-and-changing-defaults-box-plot-example" class="section level2 hasAnchor" number="14.7">
+<h2><span class="header-section-number">14.7</span> Creating a graph adding elements and changing defaults: box plot example<a href="some-simple-graph-scripts.html#creating-a-graph-adding-elements-and-changing-defaults-box-plot-example" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Next an equally simple box plot:</p>
+<p><code>graph box mpg</code></p>
+<div class="figure">
+<img src="images/mpgbox1.png" title="A Simple Box Plot" alt="" />
+<p class="caption">A box plot graph of the mpg variable from the auto data set with no options specified.</p>
+</div>
+</div>
+<div id="exercise-19" class="section level2 hasAnchor" number="14.8">
+<h2><span class="header-section-number">14.8</span> Exercise<a href="some-simple-graph-scripts.html#exercise-19" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Using the data in the file <code>medtrial.csv</code> on **<a href="https://www.ucl.ac.uk/~ccaajim/" class="uri">https://www.ucl.ac.uk/~ccaajim/</a>“, create a box plot of the variable <code>hafter</code>.</p>
+<p>Use the option <code>nooutsides</code> to block the graphing of extreme values. Use your internet search power to find the documentation of the option <code>nooutsides</code>.</p>
+</div>
+<div id="adornments" class="section level2 hasAnchor" number="14.9">
+<h2><span class="header-section-number">14.9</span> Adornments<a href="some-simple-graph-scripts.html#adornments" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>This graph has no options specified. We begin by specifying a Title. When creating a graph from a script, it makes code easier to read if each option is on a separate line, and if we indent options. To break a command over more than one line in a R do file, we must use the line extender code: <code>///</code>.</p>
+<pre><code>sysuse auto
+
+graph box mpg, ///
+  title(&quot;A Simple Box Plot&quot;)</code></pre>
+<div class="figure">
+<img src="images/mpgbox2.png" title="A Simple Box Plot with Title" alt="" />
+<p class="caption">A box plot graph of the mpg variable from the auto dataset with title added.</p>
+</div>
+<p>Now, we add a sub-title, caption and a note on the graph with instructions for position and ring:</p>
+<pre><code>sysuse auto
+
+graph box mpg, ///
+  title(&quot;A Simple Box Plot&quot;, position(12) ring(1)) ///
+  subtitle(&quot;There is only one group in this graph.&quot;, ring(0)) ///
+  note(&quot;In later graphs we will subset the data.&quot;) ///
+  caption(&quot;This is the caption or our first graph.&quot;)</code></pre>
+<div class="figure">
+<img src="images/mpgbox3.png" title="A Box Plot with Title, Subtitle and Note" alt="" />
+<p class="caption">A Box Plot with Title, Subtitle and Note</p>
+</div>
+<p>The <code>position</code> option is a clock number and <code>ring</code> is 0 or 1, indicating inside or outside the plot region.</p>
+</div>
+<div id="exercise-20" class="section level2 hasAnchor" number="14.10">
+<h2><span class="header-section-number">14.10</span> Exercise<a href="some-simple-graph-scripts.html#exercise-20" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Using the medtrial data set, create a box plot of each of hbefore and hafter.</p>
+<p>Add to each the title “Plasma concentrations of H”, with the appropriate subtitle indicating whether the measure is pre or post treatment.</p>
+</div>
+<div id="subset-the-data" class="section level2 hasAnchor" number="14.11">
+<h2><span class="header-section-number">14.11</span> Subset the data<a href="some-simple-graph-scripts.html#subset-the-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>No we subset the data using the categorical variable <code>foreign</code>.</p>
+<pre><code>graph box mpg, ///
+  title(&quot;A Box Plot&quot;, position(12) ring(1)) ///
+  note(&quot;We have no subset the data.&quot;) ///
+  caption(&quot;This is the caption for our first graph.&quot;, ring(1)) ///
+  subtitle(&quot;There are two groups in this graph.&quot;, ring(0)) ///
+  over(foreign)</code></pre>
+<p>Which produces<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a></p>
+<div class="figure">
+<img src="images/mpgbox4.png" title="A Box Plot with data grouped based on a nominal variable." alt="" />
+<p class="caption">A Box Plot with data grouped based on a nominal variable.</p>
+</div>
+<!-- You will see that this graph could be improved by paying attention to the position of some elements. I leave this to you as an exercise. -->
+<!-- We can modify this to exclude the ticks and grid lines - since this is a box plot we are only modifying the **y-axis** grid lines since no grid is the default for the **x-axis**. -->
+<!--     sysuse auto -->
+<!--     graph box mpg, /// -->
+<!--       title("A Simple Box Plot", position(12) ring(1)) /// -->
+<!--       note("In later graphs we will subset the data.") /// -->
+<!--       caption("This is the caption for our first graph.", ring(1)) /// -->
+<!--       subtitle("There are two groups in this graph.", ring(0)) /// -->
+<!--       over(foreign) /// -->
+<!--       ylabel(,nogrid noticks) /// -->
+<!--       asyvars  -->
+<!-- which produces -->
+<!-- ![A Box Plot with gridlines supressed.](./images/mpgbox5-1.png "A Box Plot with gridlines supressed.") -->
+<!-- This also introduces the use of `asyvars` with `over()`. This option chooses the first listed variable in `over()` as the y variable grouping. -->
+<!-- ## Exercise -->
+<!-- Produce one graph showing box plots for `hbefore` and `hafter` with appropriate title, for each level of `gender` and differentiating the groups using color. -->
+<!-- ## Exercise -->
+<!-- Run the following lines of code from a new do file -->
+<!--     gen surname2 = surname if smoker=="Y" -->
+<!--     scatter hbefore hafter , mlabel(surname2) -->
+<!-- Change the code so that the points are labelled only where `gender` is male. -->
+<!-- ## Standardising your graphing options -->
+<!-- We can use variables, `graph_opts` and `graph_opts_1` as examples, to standardize output. -->
+<!-- <https://dimewiki.worldbank.org/R_Coding_Practices:_Visualization> -->
+<!--     // For -twoway- graphs -->
+<!--     global graph_opts /// -->
+<!--       title(, justification(left) color(black) span pos(11)) /// -->
+<!--       graphregion(color(white)) /// -->
+<!--       xscale(noline) xtit(,placement(left) justification(left)) /// -->
+<!--       yscale(noline) ylab(,angle(0) nogrid) /// -->
+<!--       legend(region(lc(none) fc(none))) -->
+<!--     // For -graph- graphs -->
+<!--     global graph_opts_1 /// -->
+<!--       title(, justification(left) color(black) span pos(11)) /// -->
+<!--       graphregion(color(white)) /// -->
+<!--       yscale(noline) ylab(,angle(0) nogrid) /// -->
+<!--       legend(region(lc(none) fc(none))) -->
+<!-- Then use as in the following example -->
+<!--     sysuse auto.dta , clear -->
+<!--     scatter price mpg, /// -->
+<!--       ${graph_opts} -->
+<!--       graph draw , ysize(7) -->
+<!--       graph export "scatter.png" , width(4000) -->
+<!-- ## Introducing colour -->
+<!-- And now we will introduce color by factor variable levels. Note that the command that achieves this, `asyvars`, is technically instructing R to treat each level the first grouping variable as a separate y axis variable. -->
+<!--     sysuse auto, clear -->
+<!--     graph box mpg, /// -->
+<!--       title("A Simple Box Plot") /// -->
+<!--       subtitle("There are two groups in this graph.") /// -->
+<!--       over(foreign) /// -->
+<!--       asyvars  -->
+<!-- ![A box plot with factor shown by color of box.](./images/mpgbox5.png "A box plot with factor shown by color of box.") -->
+<!-- Here is the code for a graph with custom colours set for several of the plot regions. -->
+<!--     graph box mpg, /// -->
+<!--       title("A Simple Box Plot") /// -->
+<!--       subtitle("There are two groups in this graph.") /// -->
+<!--       over(foreign) /// -->
+<!--       asyvars /// -->
+<!--       graphregion(fcolor(gs13)) /// -->
+<!--       plotregion(fcolor(cranberry)) /// -->
+<!--       plotregion(icolor(ltblue)) -->
+<!-- This produces -->
+<!-- ![A box plot with a number of custom color options.](./images/mpgbox6.png "A box plot with a number of custom color options.") -->
+<!-- Here is the chart with some of the regions labelled with relevant code: -->
+<!-- ![A box plot with a number of custom color options.](./images/labelledRchart.png "A box plot with regions labelled.") -->
+<!-- It is worth noting that the undocumented command `bgcolor` appears to override custom color specifications, thus -->
+<!--     graph box mpg, /// -->
+<!--       title("A Simple Box Plot") /// -->
+<!--       subtitle("There are two groups in this graph.") /// -->
+<!--       over(foreign) /// -->
+<!--       asyvars /// -->
+<!--       bgcolor(white) -->
+<!--       graphregion(fcolor(gs13)) /// -->
+<!--       plotregion(fcolor(cranberry)) /// -->
+<!--       plotregion(icolor(ltblue)) -->
+<!-- ![A box plot with a number of custom color options.](./images/mpgbox7.png "A box plot with a number of custom color options.") -->
+<!-- ## Adding elements and changing defaults: scatter plot examples -->
+<!-- First the most basic scatter plot of two continuous variables: -->
+<!--     sysuse auto -->
+<!--     scatter mpg weight -->
+<!-- This using R defaults produces: -->
+<!-- ![A simple scatter plot of two continuous variables.](./images/mpgweight1.png "A simple scatter plot of two continuous variables.") -->
+<!-- In the next version, we first of all `separate` the mpg values into groups based on the `rep` variable. The **?** in `mpg?` below is a wildcard for the numeric suffix of the list of mpg variables created by separate. -->
+<!-- ![A scatter plot of two continuous variables with varying marker shapes and colour use.](./images/mpgweight1-1.png "A scatter plot of two continuous variables with varying marker shapes and colour use.") -->
+<!-- We also change the markers, but note we must add **msymbol()** specifications for each group. -->
+<!--     sysuse auto, clear -->
+<!--     separate mpg, by(rep) -->
+<!--     scatter mpg? weight, /// -->
+<!--     msymbol(O D T S X) /// -->
+<!--     title("Miles per gallon as a function of Weight") /// -->
+<!--     subtitle("Showing a plausibly strong, negative relationship") /// -->
+<!--     plotregion(fcolor(bluishgray)) -->
+<!-- ![A scatter plot of two continuous variables with varying marker shapes and colour use.](./images/mpgbox5-2.png "A scatter plot of two continuous variables with varying marker shapes and colour use.") -->
+<!-- ## Exercise -->
+<!-- Using the medtrial data, seperate the data in `hafter` by `smoker`. Make a scatter plot of the new `hafter?` variables against `hbefore`. -->
+<!-- Apply different marker symbols to the two data groups. Add an appropriate title. -->
+<!-- ## Using a R graph scheme -->
+<!-- A R graph scheme is a collection of pre-determined choices you can apply easily to any R graph. All aspects of the appearance can be controlled from the scheme. -->
+<!-- There are a number of built-in schemes available and there are also user contributed schemes. -->
+<!-- In the code below, I apply the scheme `plottig` from the scheme package `blindschemes` which I have previously installed in R with the command -->
+<!--     ssc install blindschemes, replace all -->
+<!-- Now the graph code: -->
+<!--     sysuse auto -->
+<!--     graph box mpg, /// -->
+<!--       title("A Simple Box Plot") /// -->
+<!--       subtitle("There are two groups in this graph.") /// -->
+<!--       over(foreign) /// -->
+<!--       asyvars /// -->
+<!--       scheme(plottig) -->
+<!-- And the result: -->
+<!-- ![A box plot with the scheme plottig applied.](./images/mpgbox8.png "A box plot with the scheme plottig applied.") -->
+<!-- This scheme is heavily inspired by the default appearance of graphs produced by `ggplot2`. -->
+<!-- And here is a scatter plot with the `plotplain` scheme applied and the legend cleaned up a bit by applying variable labels: -->
+<!--     sysuse auto, clear -->
+<!--     separate mpg, by(rep) -->
+<!--     label variable mpg1 "Fuel Consumption1" -->
+<!--     label variable mpg2 "Fuel Consumption2" -->
+<!--     label variable mpg3 "Fuel Consumption3" -->
+<!--     label variable mpg4 "Fuel Consumption4" -->
+<!--     label variable mpg5 "Fuel Consumption5" -->
+<!--     scatter mpg? weight, /// -->
+<!--         msymbol(O S D T X) /// -->
+<!--         title("Miles per gallon as a function of Weight") /// -->
+<!--         subtitle("Showing a plausibly strong, negative relationship") /// -->
+<!--         plotregion(fcolor(bluishgray)) /// -->
+<!--         scheme(plottig) -->
+<!-- ![A scatter plot with group membership indicated by markerhape and scheme plotplain applied.](./images/mpgweightscatterplain.png "A scatter plot with group membership indicated by markerhape and scheme plotplain applied.") -->
+<!-- Once you are familiar with using schemes and with the graph options you may consider using [these guidelines to modify a scheme to suit your own preferences](https://medium.com/the-R-guide/R-schemes-5ef99d099585 "guidelines to modify a R graph scheme."). -->
+</div>
+<div id="exporting-the-graph-to-word-from-your-script" class="section level2 hasAnchor" number="14.12">
+<h2><span class="header-section-number">14.12</span> Exporting the graph to Word from your script<a href="some-simple-graph-scripts.html#exporting-the-graph-to-word-from-your-script" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The following code creates a box plot with a variety of options set, and saves the output as part of a Word document also created by the script.</p>
+<pre><code>sysuse auto, replace
+cd &quot;c:\Users\DELL\Documents\Data\R\TablesTutorial\RGraphing\&quot;
+putdocx clear
+putdocx begin
+
+// Create paragraphs
+putdocx paragraph
+putdocx text (&quot;Create and embed your graph&quot;), style(Heading1)
+putdocx paragraph
+putdocx text (&quot;This is a graph created by a script and exported to Word.&quot;)
+
+// Embed a graph
+graph box mpg, ///
+  title(&quot;A Simple Box Plot&quot;) ///
+  subtitle(&quot;There are two groups in this graph.&quot;) ///
+  over(foreign) ///
+  asyvars ///
+  graphregion(fcolor(gs13)) ///
+  plotregion(fcolor(cranberry)) ///
+  plotregion(icolor(ltblue))
+  
+graph export &quot;C:\Users\DELL\Documents\Data\R\TablesTutorial\RGraphing\mgpbox7.png&quot;, as(png)
+
+putdocx image &quot;C:\Users\DELL\Documents\Data\R\TablesTutorial\RGraphing\mgpbox7.png&quot;
+
+putdocx save myreport.docx, replace</code></pre>
+<p>As you continue to create visualistions you can change the otpion on <code>putdocx save</code> from <code>replace</code> to <code>append</code>.</p>
+<!-- ## Creating and exporting several graphs in a loop -->
+<!-- There are often situations when we wish to create identical graphs for a number of variables or the same variable over or by different factors. In this case we can use a loop structure and a local macro in R to do the job for us. -->
+<!-- Consider the code: -->
+<!--     import delimited "https://www.ucl.ac.uk/~ccaajim/results.csv", clear -->
+<!--     local exams "maths english history" -->
+<!--     foreach exam in `exams' { -->
+<!--         graph box `exam'  -->
+<!--         graph export  "`exam'.png", replace -->
+<!--     } -->
+<!-- This code takes three variables from a data set and in a `foreach` loop creates then exports a boxplot of that variable. -->
+<!-- The code should be easily modifiable and in may circumstances will considerably reduce the number of lines of code written. -->
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="8">
+<li id="fn8"><p>Remember to distinguish <strong>by()</strong> and <strong>over()</strong>.<a href="some-simple-graph-scripts.html#fnref8" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="tables.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="larger-exercises-part-i.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="assets/gitbook-2.6.7/js/app.min.js"></script>
+<script src="assets/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="assets/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+},
+"toolbar": {
+"position": "static"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
